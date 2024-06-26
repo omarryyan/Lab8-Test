@@ -6,6 +6,7 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int owner_id;
     private String licensePlate;
     private double price;
     @Column(name = "manufacturing_year")
@@ -16,6 +17,12 @@ public class Car {
         this.licensePlate = licensePlate;
         this.price = price;
         this.year = year;
+    }
+    public int getOwner_id() {
+        return owner_id;
+    }
+    public void setOwner_id(int owner_id) {
+        this.owner_id = owner_id;
     }
     public String getLicensePlate() {
         return licensePlate;
