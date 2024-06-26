@@ -23,7 +23,7 @@ public class Person {
         this.email = email;
     }
 
-    public void setName(){
+    public void setName(String name){
         this.name = name;
     }
 
@@ -31,7 +31,7 @@ public class Person {
         return name;
     }
 
-    public void setFamily(){
+    public void setFamily(String family){
         this.family = family;
     }
 
@@ -39,7 +39,7 @@ public class Person {
         return family;
     }
 
-    public void setPassword(){
+    public void setPassword(String password){
         this.password = password;
     }
 
@@ -47,7 +47,7 @@ public class Person {
         return password;
     }
 
-    public void setEmail(){
+    public void setEmail(String email){
         this.email = email;
     }
 
