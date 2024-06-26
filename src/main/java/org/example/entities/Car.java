@@ -1,4 +1,4 @@
-package org.example;
+package org.example.entities;
 import javax.persistence.*;
 @Entity
 @Table(name = "cars")
@@ -8,6 +8,9 @@ public class Car {
     private int id;
     private int owner_id;
     private String licensePlate;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "car_image_id")
+    private Image image;
     private double price;
     @Column(name = "manufacturing_year")
     private int year;
@@ -17,6 +20,13 @@ public class Car {
         this.licensePlate = licensePlate;
         this.price = price;
         this.year = year;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+    public void setImage(Image image) {
+        this.image = image;
     }
     public int getOwner_id() {
         return owner_id;

@@ -36,7 +36,6 @@ public class Garage {
     public String getOwner_phone() {
         return owner_phone;
     }
-
     public int getId() {
         return id;
     }
