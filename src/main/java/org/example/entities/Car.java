@@ -22,6 +22,9 @@ public class Car {
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "garage_id"))
     Set<Garage> garagesAccepted;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Person_id")
+    private Person person;
 
 
     public Car() { }
@@ -66,5 +69,9 @@ public class Car {
     }
     public int getId() {
         return id;
+    }
+
+    public void setOwner(Person person) {
+        this.owner_id= person.getId();
     }
 }
