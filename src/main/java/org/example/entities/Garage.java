@@ -14,6 +14,8 @@ public class Garage {
     private String owner_phone;
     @ManyToMany(mappedBy = "garagesOwned")
     Set<Person> owned;
+    @ManyToMany(mappedBy = "garagesAccepted")
+    Set<Person> Accepted;
 
     public Garage() {}
     public Garage(String address, String garage_phone, String owner_phone) {

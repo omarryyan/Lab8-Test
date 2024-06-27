@@ -1,5 +1,7 @@
 package org.example.entities;
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
 @Table(name = "cars")
 public class Car {
@@ -14,6 +16,14 @@ public class Car {
     private double price;
     @Column(name = "manufacturing_year")
     private int year;
+    @ManyToMany
+    @JoinTable(
+            name = "car_garage",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "garage_id"))
+    Set<Garage> garagesAccepted;
+
+
     public Car() { }
     public Car(String licensePlate, double price, int year,int owner_id, Image image ) {
         super();
