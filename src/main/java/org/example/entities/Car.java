@@ -15,11 +15,13 @@ public class Car {
     @Column(name = "manufacturing_year")
     private int year;
     public Car() { }
-    public Car(String licensePlate, double price, int year) {
+    public Car(String licensePlate, double price, int year,int owner_id, Image image ) {
         super();
         this.licensePlate = licensePlate;
         this.price = price;
         this.year = year;
+        this.image = image;
+        this.owner_id = owner_id;
     }
 
     public Image getImage() {

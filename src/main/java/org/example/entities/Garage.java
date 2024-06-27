@@ -1,6 +1,7 @@
 package org.example.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "garages")
@@ -11,6 +12,9 @@ public class Garage {
     private String address;
     private String garage_phone;
     private String owner_phone;
+    @ManyToMany(mappedBy = "garagesOwned")
+    Set<Person> owned;
+
     public Garage() {}
     public Garage(String address, String garage_phone, String owner_phone) {
         this.address = address;

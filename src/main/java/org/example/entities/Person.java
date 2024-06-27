@@ -1,6 +1,9 @@
 package org.example.entities;
 
+
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "people")
@@ -14,6 +17,12 @@ public class Person {
     @Column(name = "personal_password")
     private String password;
     private String email;
+    @ManyToMany
+    @JoinTable(
+            name = "person_garage",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "garage_id"))
+    Set<Garage> garagesOwned;
 
     public Person(){}
     public Person(String name, String family, String password, String email) {

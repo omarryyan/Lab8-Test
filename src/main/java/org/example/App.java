@@ -5,6 +5,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.example.entities.Car;
+import org.example.entities.Image;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -42,8 +43,8 @@ public class App
         Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
-            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 +
-                    random.nextInt(19));
+            Image image = new Image();
+            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),5 ,image);
             session.save(car);
  /*
  * The call to session.flush() updates the DB immediately without ending the transaction.
