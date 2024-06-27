@@ -3,12 +3,15 @@ import java.util.List;
 import java.util.Random;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+
+import org.example.entities.Car;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import java.util.Scanner;
 
 public class App
 {
@@ -17,13 +20,20 @@ public class App
 
     private static SessionFactory getSessionFactory() throws HibernateException {
 
-
         Configuration configuration = new Configuration();
+
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter password");
+        String password = myObj.nextLine();  // Read user input
+        myObj.close();
+        configuration.setProperty("hibernate.connection.password", password);
 
         // Add ALL of your entities here. You can also try adding a wholepackage.
         configuration.addAnnotatedClass(Car.class);
 
+
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+
 
         return configuration.buildSessionFactory(serviceRegistry);
     }
@@ -68,11 +78,12 @@ public class App
     }
 
     public static void main( String[] args ) {
+
         try {
             SessionFactory sessionFactory = getSessionFactory();
+
             session = sessionFactory.openSession();
             session.beginTransaction();
-
 
             generateCars();
 

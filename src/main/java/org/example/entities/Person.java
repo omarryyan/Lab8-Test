@@ -23,38 +23,30 @@ public class Person {
         this.email = email;
     }
 
-    public void setName(){
+    public void setName(String name){
         this.name = name;
     }
-
     public String getName(){
         return name;
     }
-
-    public void setFamily(){
+    public void setFamily(String family){
         this.family = family;
     }
-
     public String getFamily(){
         return family;
     }
-
-    public void setPassword(){
+    public void setPassword(String password){
         this.password = password;
     }
-
     public String getPassword(){
         return password;
     }
-
-    public void setEmail(){
+    public void setEmail(String email){
         this.email = email;
     }
-
     public String getEmail(){
         return email;
     }
-
     public int getId() {
         return id;
     }
