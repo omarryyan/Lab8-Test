@@ -18,12 +18,14 @@ public class Person {
     @Column(name = "personal_password")
     private String password;
     private String email;
+
     @ManyToMany
     @JoinTable(
             name = "person_garage",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "garage_id"))
-    Set<Garage> garagesOwned;
+    Set<Garage> garages;
+
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Car> cars = new HashSet<>();
 

@@ -13,7 +13,7 @@ public class Garage {
     private String address;
     private String garage_phone;
 
-    @ManyToMany(mappedBy = "garagesOwned")
+    @ManyToMany(mappedBy = "garages")
     Set<Person> owners = new HashSet<>();
 
     @ManyToMany(mappedBy = "garages")

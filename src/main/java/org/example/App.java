@@ -150,14 +150,13 @@ public class App
             generatePersons();
             generateCars();
             generateGarages();
-            generateImages();
 
             getAllCars().getFirst().setOwner(getAllPersons().getFirst());
 
             getAllCars().getFirst().addGarage(getAllGarages().getFirst());
             getAllCars().getFirst().addGarage(getAllGarages().getFirst());
 
-//            getAllGarages().getFirst().removeCar(getAllCars().getFirst());
+            getAllGarages().getFirst().removeCar(getAllCars().getFirst());
 
             printAllCars();
             printAllPersons();
