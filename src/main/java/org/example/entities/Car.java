@@ -22,7 +22,7 @@ public class Car {
             name = "car_garage",
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "garage_id"))
-    Set<Garage> garagesAccepted = new HashSet<Garage>();
+    Set<Garage> garages = new HashSet<Garage>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Owner_id")
@@ -68,11 +68,31 @@ public class Car {
     public int getId() {
         return id;
     }
+
     public void setOwner(Person person) {
         this.person = person;
     }
+
     public Person getOwner() {
         return person;
+    }
+
+    public Set<Garage> getGarages() {
+        return garages;
+    }
+
+    public void setGarages(Set<Garage> garages) {
+        this.garages = garages;
+    }
+
+    public void addGarage(Garage garage) {
+        this.garages.add(garage);
+        garage.cars.add(this);
+    }
+
+    public void removeGarage(Garage garage) {
+        this.garages.remove(garage);
+        garage.cars.remove(this);
     }
 
     @Override
