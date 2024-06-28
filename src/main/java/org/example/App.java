@@ -4,7 +4,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.example.entities.Car;
-import org.example.entities.Image;
 import org.example.entities.Person;
 import org.example.entities.Garage;
 
@@ -32,7 +31,6 @@ public class App
 
         // Add ALL of your entities here. You can also try adding a wholepackage.
         configuration.addAnnotatedClass(Car.class);
-        configuration.addAnnotatedClass(Image.class);
         configuration.addAnnotatedClass(Person.class);
         configuration.addAnnotatedClass(Garage.class);
 
@@ -45,25 +43,16 @@ public class App
 
     private static void generateCars() throws Exception {
         Random random = new Random();
-        Image[] images = new Image[10];
 
         for (int i = 0; i < 10; i++) {
-            images[i] = new Image("image" + i + ".jpg");
-            session.save(images[i]);
-            session.flush();
-        }
-
-        for (int i = 0; i < 10; i++) {
-            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24), images[i]);
+            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),"image" + i + ".jpg" );
             session.save(car);
             session.flush();
         }
-
     }
 
     private static void generatePersons() throws Exception {
         Person[] persons = new Person[8];
-
 
         persons[0] = new Person("Ahmed", "Mansoori", "password123", "ahmed.mansoori@example.com");
         persons[1] = new Person("Fatima", "Farsi", "password234", "fatima.farsi@example.com");

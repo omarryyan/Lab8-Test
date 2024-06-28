@@ -10,9 +10,7 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String licensePlate;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "car_image_id")
-    private Image image;
+    private String image;
     private double price;
     @Column(name = "manufacturing_year")
     private int year;
@@ -30,7 +28,7 @@ public class Car {
 
 
     public Car() { }
-    public Car(String licensePlate, double price, int year, Image image ) {
+    public Car(String licensePlate, double price, int year, String image ) {
         super();
         this.licensePlate = licensePlate;
         this.price = price;
@@ -38,10 +36,10 @@ public class Car {
         this.image = image;
     }
 
-    public Image getImage() {
+    public String getImage() {
         return image;
     }
-    public void setImage(Image image) {
+    public void setImage(String image) {
         this.image = image;
     }
     public int getOwner_id() {
