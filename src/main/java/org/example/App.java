@@ -49,8 +49,7 @@ public class App
         Random random = new Random();
 
         for (int i = 0; i < 10; i++) {
-            Image image = new Image();
-            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),5 ,image);
+            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),5);
             session.save(car);
             session.flush();
         }
@@ -73,6 +72,15 @@ public class App
             session.save(person);
             session.flush();
         }
+    }
+
+    private static void generateGarages() throws Exception {
+        Garage[] garages = new Garage[3];
+
+
+
+        // Example of how to access the array
+
     }
 
     private static List<Car> getAllCars() throws Exception {
