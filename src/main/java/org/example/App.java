@@ -25,7 +25,7 @@ public class App
         Configuration configuration = new Configuration();
 
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter password");
+        System.out.println("Enter password for MYSQL DB connection:");
         String password = myObj.nextLine();  // Read user input
         myObj.close();
         configuration.setProperty("hibernate.connection.password", password);
@@ -179,7 +179,6 @@ public class App
     }
 
     public static void main( String[] args ) {
-
         try {
             SessionFactory sessionFactory = getSessionFactory();
 
@@ -192,7 +191,9 @@ public class App
 
             initializeDB();
 
+            System.out.println("--------------============ Printing 3 Garages ============--------------");
             printAllGarages();
+            System.out.println("--------------============ Printing 10 Cars ============--------------");
             printAllCars();
 
             session.getTransaction().commit(); // Save everything.
