@@ -120,17 +120,15 @@ public class App
         for (Car car : cars) {
             System.out.println(car);
             System.out.print("Garages address: ");
-            for(Garage garage : car.getGarages()) {
-                System.out.print(garage.getAddress()+" / ");
+            Iterator<Garage> iterator = car.getGarages().iterator();
+            while (iterator.hasNext()) {
+                Garage garage = iterator.next();
+                System.out.print(garage.getAddress());
+                if (iterator.hasNext()) {
+                    System.out.print(" / ");
+                }
             }
             System.out.println("\n");
-        }
-    }
-
-    private static void printAllPersons() throws Exception {
-        List<Person> persons = getAllPersons();
-        for (Person person : persons) {
-            System.out.println(person);
         }
     }
 
