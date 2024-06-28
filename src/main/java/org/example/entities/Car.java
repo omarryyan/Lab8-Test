@@ -1,5 +1,7 @@
 package org.example.entities;
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
 @Table(name = "cars")
 public class Car {
@@ -14,12 +16,25 @@ public class Car {
     private double price;
     @Column(name = "manufacturing_year")
     private int year;
+    @ManyToMany
+    @JoinTable(
+            name = "car_garage",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "garage_id"))
+    Set<Garage> garagesAccepted;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Person_id")
+    private Person person;
+
+
     public Car() { }
-    public Car(String licensePlate, double price, int year) {
+    public Car(String licensePlate, double price, int year,int owner_id, Image image ) {
         super();
         this.licensePlate = licensePlate;
         this.price = price;
         this.year = year;
+        this.image = image;
+        this.owner_id = owner_id;
     }
 
     public Image getImage() {
@@ -54,5 +69,9 @@ public class Car {
     }
     public int getId() {
         return id;
+    }
+
+    public void setOwner(Person person) {
+        this.owner_id= person.getId();
     }
 }
