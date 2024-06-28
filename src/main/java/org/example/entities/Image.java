@@ -10,6 +10,8 @@ public class Image {
     private int id;
     @Column(name="image_url")
     private String url;
+    @OneToOne(mappedBy = "image")
+    private Person person;
 
     public Image() {}
     public Image(String url) {

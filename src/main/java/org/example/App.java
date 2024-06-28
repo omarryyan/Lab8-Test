@@ -5,6 +5,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.example.entities.Car;
+import org.example.entities.Garage;
 import org.example.entities.Image;
 import org.example.entities.Person;
 import org.hibernate.HibernateException;
@@ -24,14 +25,17 @@ public class App
 
         Configuration configuration = new Configuration();
 
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter password");
-        String password = myObj.nextLine();  // Read user input
-        myObj.close();
-        configuration.setProperty("hibernate.connection.password", password);
+//        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+//        System.out.println("Enter password");
+//        String password = myObj.nextLine();  // Read user input
+//        myObj.close();
+//        configuration.setProperty("hibernate.connection.password", password);
 
         // Add ALL of your entities here. You can also try adding a wholepackage.
         configuration.addAnnotatedClass(Car.class);
+        configuration.addAnnotatedClass(Person.class);
+        configuration.addAnnotatedClass(Garage.class);
+        configuration.addAnnotatedClass(Image.class);
 
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
@@ -73,7 +77,6 @@ public class App
             System.out.println("Name: " + person.getName() + ", Family: " + person.getFamily() + ", Email: " + person.getEmail());
         }
     }
-
 
     private static List<Car> getAllCars() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
