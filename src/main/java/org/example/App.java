@@ -1,6 +1,5 @@
 package org.example;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -15,7 +14,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-import java.util.Scanner;
 
 public class App
 {
@@ -141,8 +139,13 @@ public class App
         for (Garage garage : garages) {
             System.out.println(garage);
             System.out.print("Cars License Plates: ");
-            for(Car car: garage.getCars()){
-                System.out.print(car.getLicensePlate()+" / ");
+            Iterator<Car> iterator = garage.getCars().iterator();
+            while (iterator.hasNext()) {
+                Car car = iterator.next();
+                System.out.print(car.getLicensePlate());
+                if (iterator.hasNext()) {
+                    System.out.print(" / ");
+                }
             }
             System.out.println("\n");
         }
