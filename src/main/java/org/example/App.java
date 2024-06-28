@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaQuery;
 
 import org.example.entities.Car;
 import org.example.entities.Image;
+import org.example.entities.Person;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -54,6 +55,25 @@ public class App
             session.flush();
         }
     }
+
+    private static void generatePersons() throws Exception {
+        Person[] persons = new Person[8];
+
+        persons[0] = new Person("Ahmed", "Al-Mansoori", "password123", "ahmed.mansoori@example.com");
+        persons[1] = new Person("Fatima", "Al-Farsi", "password234", "fatima.farsi@example.com");
+        persons[2] = new Person("Hassan", "Al-Tamimi", "password345", "hassan.tamimi@example.com");
+        persons[3] = new Person("Layla", "Al-Habibi", "password456", "layla.habibi@example.com");
+        persons[4] = new Person("Omar", "Al-Qadri", "password567", "omar.qadri@example.com");
+        persons[5] = new Person("Aisha", "Al-Sayed", "password678", "aisha.sayed@example.com");
+        persons[6] = new Person("Khalid", "Al-Aziz", "password789", "khalid.aziz@example.com");
+        persons[7] = new Person("Mariam", "Al-Hashimi", "password890", "mariam.hashimi@example.com");
+
+        // Example of how to access the array
+        for (Person person : persons) {
+            System.out.println("Name: " + person.getName() + ", Family: " + person.getFamily() + ", Email: " + person.getEmail());
+        }
+    }
+
 
     private static List<Car> getAllCars() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
