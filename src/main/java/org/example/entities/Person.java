@@ -24,10 +24,10 @@ public class Person {
             name = "person_garage",
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "garage_id"))
-    Set<Garage> garages;
+    Set<Garage> garages=new HashSet<>();
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Car> cars = new HashSet<>();
+    Set<Car> cars = new HashSet<>();
 
     public Person(){}
     public Person(String name, String family, String password, String email) {
@@ -68,6 +68,15 @@ public class Person {
     }
     public int getId() {
         return id;
+    }
+
+    public void addGarage(Garage garage) {
+        garages.add(garage);
+        garage.owners.add(this);
+    }
+    public void removeGarage(Garage garage) {
+        garages.remove(garage);
+        garage.owners.remove(this);
     }
 
     @Override

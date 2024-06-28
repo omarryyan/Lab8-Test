@@ -154,9 +154,7 @@ public class App
             getAllCars().getFirst().setOwner(getAllPersons().getFirst());
 
             getAllCars().getFirst().addGarage(getAllGarages().getFirst());
-            getAllCars().getFirst().addGarage(getAllGarages().getFirst());
 
-            getAllGarages().getFirst().removeCar(getAllCars().getFirst());
 
             printAllCars();
             printAllPersons();

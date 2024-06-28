@@ -67,6 +67,15 @@ public class Garage {
         car.removeGarage(this);
     }
 
+    public void addPerson(Person person) {
+        owners.add(person);
+        person.addGarage(this);
+    }
+    public void removePerson(Person person) {
+        owners.remove(person);
+        person.removeGarage(this);
+    }
+
     @Override
     public String toString() {
         return "Garage [Address=" + address + ", Phone=" + garage_phone + "]";
