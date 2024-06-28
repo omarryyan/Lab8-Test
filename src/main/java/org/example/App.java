@@ -139,6 +139,26 @@ public class App
         }
     }
 
+    private static void initializeDB() throws Exception {
+        List<Car> cars = getAllCars();
+        List<Person> persons = getAllPersons();
+        List<Garage> garages = getAllGarages();
+        for (Car car : cars) {
+            car.addGarage(garages.get(0));
+            car.addGarage(garages.get(1));
+            car.addGarage(garages.get(2));
+        }
+        int i=0;
+        for (Person person : persons) {
+            person.addGarage(garages.get(0));
+            person.addGarage(garages.get(1));
+            person.addGarage(garages.get(2));
+            person.addCar(cars.get(i++));
+        }
+        persons.getLast().addCar(cars.get(8));
+        persons.getLast().addCar(cars.get(9));
+    }
+
     public static void main( String[] args ) {
 
         try {
@@ -151,9 +171,7 @@ public class App
             generateCars();
             generateGarages();
 
-            getAllCars().getFirst().setOwner(getAllPersons().getFirst());
-
-            getAllCars().getFirst().addGarage(getAllGarages().getFirst());
+            initializeDB();
 
 
             printAllCars();
