@@ -11,7 +11,7 @@ public class Image {
     @Column(name="image_url")
     private String url;
     @OneToOne(mappedBy = "image")
-    private Person person;
+    private Car car;
 
     public Image() {}
     public Image(String url) {
