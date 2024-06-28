@@ -76,6 +76,10 @@ public class Garage {
         person.removeGarage(this);
     }
 
+    public Set<Car> getCars() {
+        return cars;
+    }
+
     @Override
     public String toString() {
         return "Garage [Address=" + address + ", Phone=" + garage_phone + "]";

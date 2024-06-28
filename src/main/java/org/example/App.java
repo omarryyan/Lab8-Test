@@ -96,7 +96,6 @@ public class App
         }
     }
 
-
     private static List<Car> getAllCars() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Car> query = builder.createQuery(Car.class);
@@ -122,6 +121,11 @@ public class App
         List<Car> cars = getAllCars();
         for (Car car : cars) {
             System.out.println(car);
+            System.out.print("Garages address: ");
+            for(Garage garage : car.getGarages()) {
+                System.out.print(garage.getAddress()+" / ");
+            }
+            System.out.println("\n");
         }
     }
 
@@ -136,6 +140,11 @@ public class App
         List<Garage> garages = getAllGarages();
         for (Garage garage : garages) {
             System.out.println(garage);
+            System.out.print("Cars License Plates: ");
+            for(Car car: garage.getCars()){
+                System.out.print(car.getLicensePlate()+" / ");
+            }
+            System.out.println("\n");
         }
     }
 
@@ -143,11 +152,20 @@ public class App
         List<Car> cars = getAllCars();
         List<Person> persons = getAllPersons();
         List<Garage> garages = getAllGarages();
-        for (Car car : cars) {
-            car.addGarage(garages.get(0));
-            car.addGarage(garages.get(1));
-            car.addGarage(garages.get(2));
-        }
+
+        cars.get(0).addGarage(garages.get(0));
+        cars.get(0).addGarage(garages.get(1));
+        cars.get(1).addGarage(garages.get(2));
+        cars.get(1).addGarage(garages.get(1));
+        cars.get(2).addGarage(garages.get(2));
+        cars.get(3).addGarage(garages.get(1));
+        cars.get(4).addGarage(garages.get(0));
+        cars.get(6).addGarage(garages.get(0));
+        cars.get(7).addGarage(garages.get(0));
+        cars.get(7).addGarage(garages.get(1));
+        cars.get(7).addGarage(garages.get(2));
+
+
         int i=0;
         for (Person person : persons) {
             person.addGarage(garages.get(0));
@@ -173,10 +191,8 @@ public class App
 
             initializeDB();
 
-
-            printAllCars();
-            printAllPersons();
             printAllGarages();
+            printAllCars();
 
             session.getTransaction().commit(); // Save everything.
 
