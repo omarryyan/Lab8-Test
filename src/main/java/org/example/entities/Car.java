@@ -1,5 +1,6 @@
 package org.example.entities;
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -8,7 +9,6 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int owner_id;
     private String licensePlate;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_image_id")
@@ -16,24 +16,26 @@ public class Car {
     private double price;
     @Column(name = "manufacturing_year")
     private int year;
+
     @ManyToMany
     @JoinTable(
             name = "car_garage",
             joinColumns = @JoinColumn(name = "car_id"),
             inverseJoinColumns = @JoinColumn(name = "garage_id"))
-    Set<Garage> garagesAccepted;
+    Set<Garage> garagesAccepted = new HashSet<Garage>();
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Person_id")
+    @JoinColumn(name = "Owner_id")
     private Person person;
 
 
     public Car() { }
-    public Car(String licensePlate, double price, int year,int owner_id ) {
+    public Car(String licensePlate, double price, int year, Image image ) {
         super();
         this.licensePlate = licensePlate;
         this.price = price;
         this.year = year;
-        this.owner_id = owner_id;
+        this.image = image;
     }
 
     public Image getImage() {
@@ -43,10 +45,7 @@ public class Car {
         this.image = image;
     }
     public int getOwner_id() {
-        return owner_id;
-    }
-    public void setOwner_id(int owner_id) {
-        this.owner_id = owner_id;
+        return this.person.getId();
     }
     public String getLicensePlate() {
         return licensePlate;
@@ -69,8 +68,15 @@ public class Car {
     public int getId() {
         return id;
     }
-
     public void setOwner(Person person) {
-        this.owner_id= person.getId();
+        this.person = person;
+    }
+    public Person getOwner() {
+        return person;
+    }
+
+    @Override
+    public String toString() {
+        return "Car [License Plate=" + licensePlate + ", Price=" + price + ", Year=" + year + ", Image=" + image + "]\n"  + "Owner:" + person  ;
     }
 }

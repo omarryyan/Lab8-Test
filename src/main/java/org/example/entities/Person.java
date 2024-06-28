@@ -67,4 +67,11 @@ public class Person {
     public int getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "User [Name=" + name + ", Family=" + family + ", Password=" + password + ", Email=" + email + "]";
+    }
+
+
 }

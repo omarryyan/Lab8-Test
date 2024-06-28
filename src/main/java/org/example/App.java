@@ -47,9 +47,16 @@ public class App
 
     private static void generateCars() throws Exception {
         Random random = new Random();
+        Image[] images = new Image[10];
 
         for (int i = 0; i < 10; i++) {
-            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),5);
+            images[i] = new Image("image" + i + ".jpg");
+            session.save(images[i]);
+            session.flush();
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24), images[i]);
             session.save(car);
             session.flush();
         }
@@ -58,6 +65,7 @@ public class App
 
     private static void generatePersons() throws Exception {
         Person[] persons = new Person[8];
+
 
         persons[0] = new Person("Ahmed", "Mansoori", "password123", "ahmed.mansoori@example.com");
         persons[1] = new Person("Fatima", "Farsi", "password234", "fatima.farsi@example.com");
@@ -88,37 +96,46 @@ public class App
         }
     }
 
-    private static void generateImages() throws Exception {
-        Image[] images = new Image[10];
-        for (int i = 0; i < 10; i++) {
-            images[i] = new Image("image" + i + ".jpg");
-            session.save(images[i]);
-            session.flush();
-        }
-
-
-    }
 
     private static List<Car> getAllCars() throws Exception {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Car> query = builder.createQuery(Car.class);
         query.from(Car.class);
-        List<Car> data = session.createQuery(query).getResultList();
-        return data;
+        return session.createQuery(query).getResultList();
+    }
+
+    private static List<Person> getAllPersons() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Person> query = builder.createQuery(Person.class);
+        query.from(Person.class);
+        return session.createQuery(query).getResultList();
+    }
+
+    static List<Garage> getAllGarages() throws Exception {
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Garage> query = builder.createQuery(Garage.class);
+        query.from(Garage.class);
+        return session.createQuery(query).getResultList();
     }
 
     private static void printAllCars() throws Exception {
         List<Car> cars = getAllCars();
         for (Car car : cars) {
-            System.out.print("Id: ");
-            System.out.print(car.getId());
-            System.out.print(", License plate: ");
-            System.out.print(car.getLicensePlate());
-            System.out.print(", Price: ");
-            System.out.print(car.getPrice());
-            System.out.print(", Year: ");
-            System.out.print(car.getYear());
-            System.out.print('\n');
+            System.out.println(car);
+        }
+    }
+
+    private static void printAllPersons() throws Exception {
+        List<Person> persons = getAllPersons();
+        for (Person person : persons) {
+            System.out.println(person);
+        }
+    }
+
+    private static void printAllGarages() throws Exception {
+        List<Garage> garages = getAllGarages();
+        for (Garage garage : garages) {
+            System.out.println(garage);
         }
     }
 
@@ -135,7 +152,13 @@ public class App
             generateGarages();
             generateImages();
 
+            getAllCars().getFirst().setOwner(getAllPersons().getFirst());
+
+            getAllGarages().getFirst().addCar(getAllCars().getFirst());
+
             printAllCars();
+            printAllPersons();
+            printAllGarages();
 
             session.getTransaction().commit(); // Save everything.
 
