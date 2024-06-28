@@ -26,11 +26,11 @@ public class App
 
         Configuration configuration = new Configuration();
 
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter password");
-        String password = myObj.nextLine();  // Read user input
-        myObj.close();
-        configuration.setProperty("hibernate.connection.password", password);
+//        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+//        System.out.println("Enter password");
+//        String password = myObj.nextLine();  // Read user input
+//        myObj.close();
+//        configuration.setProperty("hibernate.connection.password", password);
 
         // Add ALL of your entities here. You can also try adding a wholepackage.
         configuration.addAnnotatedClass(Car.class);
@@ -133,7 +133,7 @@ public class App
             generatePersons();
             generateCars();
             generateGarages();
-
+            generateImages();
 
             printAllCars();
 
