@@ -70,7 +70,7 @@ public class App
 
         // Example of how to access the array
         for (Person person : persons) {
-            System.out.println("Name: " + person.getName() + ", Family: " + person.getFamily() + ", Email: " + person.getEmail());
+            session.save(person);
         }
     }
 
