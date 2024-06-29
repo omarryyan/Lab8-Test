@@ -56,7 +56,7 @@ public class App
         }
 
         for (int i = 0; i < 10; i++) {
-            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),5, images[i]);
+            Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24), images[i]);
             session.save(car);
             session.flush();
         }
@@ -121,7 +121,21 @@ public class App
     private static void printAllCars() throws Exception {
         List<Car> cars = getAllCars();
         for (Car car : cars) {
-            System.out.print(car);
+            System.out.println(car);
+        }
+    }
+
+    private static void printAllPersons() throws Exception {
+        List<Person> persons = getAllPersons();
+        for (Person person : persons) {
+            System.out.println(person);
+        }
+    }
+
+    private static void printAllGarages() throws Exception {
+        List<Garage> garages = getAllGarages();
+        for (Garage garage : garages) {
+            System.out.println(garage);
         }
     }
 
@@ -138,7 +152,13 @@ public class App
             generateGarages();
 
 
+            getAllCars().getFirst().setOwner(getAllPersons().getFirst());
+
+            getAllGarages().getFirst().addCar(getAllCars().getFirst());
+
             printAllCars();
+            printAllPersons();
+            printAllGarages();
 
             session.getTransaction().commit(); // Save everything.
 
