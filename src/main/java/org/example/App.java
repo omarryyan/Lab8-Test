@@ -133,6 +133,7 @@ public class App
             generatePersons();
             generateCars();
             generateGarages();
+            generateImages();
 
 
             printAllCars();
