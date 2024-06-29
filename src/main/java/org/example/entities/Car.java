@@ -28,12 +28,13 @@ public class Car {
 
 
     public Car() { }
-    public Car(String licensePlate, double price, int year,int owner_id ) {
+    public Car(String licensePlate, double price, int year,int owner_id, Image image ) {
         super();
         this.licensePlate = licensePlate;
         this.price = price;
         this.year = year;
         this.owner_id = owner_id;
+        this.image = image;
     }
 
     public Image getImage() {
@@ -72,5 +73,12 @@ public class Car {
 
     public void setOwner(Person person) {
         this.owner_id= person.getId();
+    }
+    public Person getOwner() {
+        return person;
+    }
+    @Override
+    public String toString() {
+        return "Car [License Plate=" + licensePlate + ", Price=" + price + ", Year=" + year + ", Image=" + image + "]\n"  + "Owner:" + person + "\n" ;
     }
 }

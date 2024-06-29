@@ -40,4 +40,8 @@ public class Garage {
     public int getId() {
         return id;
     }
+    @Override
+    public String toString() {
+        return "Garage [Address=" + address + ", Phone=" + garage_phone + "]";
+    }
 }
