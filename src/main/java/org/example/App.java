@@ -53,19 +53,20 @@ public class App
             session.save(car);
             session.flush();
         }
+
     }
 
     private static void generatePersons() throws Exception {
         Person[] persons = new Person[8];
 
-        persons[0] = new Person("Ahmed", "Al-Mansoori", "password123", "ahmed.mansoori@example.com");
-        persons[1] = new Person("Fatima", "Al-Farsi", "password234", "fatima.farsi@example.com");
-        persons[2] = new Person("Hassan", "Al-Tamimi", "password345", "hassan.tamimi@example.com");
-        persons[3] = new Person("Layla", "Al-Habibi", "password456", "layla.habibi@example.com");
-        persons[4] = new Person("Omar", "Al-Qadri", "password567", "omar.qadri@example.com");
-        persons[5] = new Person("Aisha", "Al-Sayed", "password678", "aisha.sayed@example.com");
-        persons[6] = new Person("Khalid", "Al-Aziz", "password789", "khalid.aziz@example.com");
-        persons[7] = new Person("Mariam", "Al-Hashimi", "password890", "mariam.hashimi@example.com");
+        persons[0] = new Person("Ahmed", "Mansoori", "password123", "ahmed.mansoori@example.com");
+        persons[1] = new Person("Fatima", "Farsi", "password234", "fatima.farsi@example.com");
+        persons[2] = new Person("Hassan", "Tamimi", "password345", "hassan.tamimi@example.com");
+        persons[3] = new Person("Layla", "Habibi", "password456", "layla.habibi@example.com");
+        persons[4] = new Person("Omar", "Qadri", "password567", "omar.qadri@example.com");
+        persons[5] = new Person("Aisha", "Sayed", "password678", "aisha.sayed@example.com");
+        persons[6] = new Person("Khalid", "Aziz", "password789", "khalid.aziz@example.com");
+        persons[7] = new Person("Mariam", "Hashimi", "password890", "mariam.hashimi@example.com");
 
         // Example of how to access the array
         for (Person person : persons) {
@@ -77,9 +78,24 @@ public class App
     private static void generateGarages() throws Exception {
         Garage[] garages = new Garage[3];
 
+        garages[0] = new Garage("123 Dizengoff St, Tel Aviv", "+972-3-1234567");
+        garages[1] = new Garage("45 Jaffa St, Jerusalem", "+972-2-2345678");
+        garages[2] = new Garage("78 Herzl Blvd, Haifa", "+972-4-3456789");
 
+        for (Garage garage : garages) {
+            session.save(garage);
+            session.flush();
+        }
+    }
 
-        // Example of how to access the array
+    private static void generateImages() throws Exception {
+        Image[] images = new Image[10];
+        for (int i = 0; i < 10; i++) {
+            images[i] = new Image("image" + i + ".jpg");
+            session.save(images[i]);
+            session.flush();
+        }
+
 
     }
 
@@ -114,8 +130,11 @@ public class App
             session = sessionFactory.openSession();
             session.beginTransaction();
 
-            generateCars();
             generatePersons();
+            generateCars();
+            generateGarages();
+
+
             printAllCars();
 
             session.getTransaction().commit(); // Save everything.
