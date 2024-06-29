@@ -16,8 +16,8 @@ public class Garage {
     @ManyToMany(mappedBy = "garagesOwned")
     Set<Person> owners = new HashSet<>();
 
-    @ManyToMany(mappedBy = "garagesAccepted")
-    Set<Car> AcceptedCars = new HashSet<>();
+    @ManyToMany(mappedBy = "garages")
+    Set<Car> cars = new HashSet<>();
 
     public Garage() {}
     public Garage(String address, String garage_phone) {
@@ -58,11 +58,13 @@ public class Garage {
     }
 
     public void addCar(Car car) {
-        AcceptedCars.add(car);
+        this.cars.add(car);
+        car.addGarage(this);
     }
 
     public void removeCar(Car car) {
-        AcceptedCars.remove(car);
+        this.cars.remove(car);
+        car.removeGarage(this);
     }
 
     @Override
