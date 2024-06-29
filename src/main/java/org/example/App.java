@@ -7,6 +7,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import org.example.entities.Car;
 import org.example.entities.Image;
 import org.example.entities.Person;
+import org.example.entities.Garage;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,6 +34,9 @@ public class App
 
         // Add ALL of your entities here. You can also try adding a wholepackage.
         configuration.addAnnotatedClass(Car.class);
+        configuration.addAnnotatedClass(Image.class);
+        configuration.addAnnotatedClass(Person.class);
+        configuration.addAnnotatedClass(Garage.class);
 
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
@@ -47,11 +52,6 @@ public class App
             Image image = new Image();
             Car car = new Car("MOO-" + random.nextInt(), 100000, 2000 + random.nextInt(24),5 ,image);
             session.save(car);
- /*
- * The call to session.flush() updates the DB immediately without ending the transaction.
- * Recommended to do after an arbitrary unit of work.
- * MANDATORY to do if you are saving a large amount of data -otherwise you may get cache errors.
- */
             session.flush();
         }
     }
@@ -71,6 +71,7 @@ public class App
         // Example of how to access the array
         for (Person person : persons) {
             session.save(person);
+            session.flush();
         }
     }
 
